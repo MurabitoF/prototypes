@@ -9,7 +9,7 @@ const Viewer = () => {
     <iframe
       width="100%"
       height="100%"
-      style={{ border: "none", backgroundColor: "white" }}
+      style={{ border: "none"}}
       srcDoc={buildHTML(html, css, javascript)}
     />
   );
