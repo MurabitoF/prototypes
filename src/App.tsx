@@ -1,6 +1,7 @@
 import { Allotment } from "allotment";
 import Editor from "./components/Editor";
 import "allotment/dist/style.css";
+import Viewer from "./components/Viewer";
 
 function App() {
   return (
@@ -9,11 +10,7 @@ function App() {
     >
       <Allotment vertical snap>
         <Allotment.Pane>
-          <iframe
-            width="100%"
-            height="100%"
-            style={{ border: "none", backgroundColor: "white" }}
-          />
+          <Viewer />
         </Allotment.Pane>
         <Allotment.Pane>
           <Allotment snap>
