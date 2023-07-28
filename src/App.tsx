@@ -18,13 +18,13 @@ function App() {
         <Allotment.Pane>
           <Allotment snap>
             <Allotment.Pane>
-              <Editor />
+              <Editor language="html" />
             </Allotment.Pane>
             <Allotment.Pane>
-              <Editor />
+              <Editor language="css" />
             </Allotment.Pane>
             <Allotment.Pane>
-              <Editor />
+              <Editor language="javascript" />
             </Allotment.Pane>
           </Allotment>
         </Allotment.Pane>
@@ -34,4 +34,3 @@ function App() {
 }
 
 export default App;
-
