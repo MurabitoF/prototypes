@@ -1,9 +1,8 @@
-import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
+import {editor} from "monaco-editor/";
 import { type Store } from "../types";
 
-const DEFAULT_EDITOR_SETTINGS: monaco.editor.IStandaloneEditorConstructionOptions =
+const DEFAULT_EDITOR_SETTINGS: editor.IStandaloneEditorConstructionOptions =
   {
-    theme: "vs-dark",
     fontFamily: "Cascadia Code, monospace",
     fontLigatures: true,
     lineNumbers: "off",
@@ -11,7 +10,7 @@ const DEFAULT_EDITOR_SETTINGS: monaco.editor.IStandaloneEditorConstructionOption
     minimap: {
       enabled: false,
     },
-    wordWrap: "on",
+    wordWrap: "on"
   };
 
 export const DEFAULT_INITIAL_SETTINGS: Store = {
