@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;500&family=REM:wght@400;700&display=swap");
+
 * {
   box-sizing: border-box;
 }
@@ -5,4 +7,23 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: "REM", sans-serif;
 }
+
+.bg-dark {
+  background-color: #282c34;
+  color: #dcdfe4;
+}
+
+.bg-medium {
+  background-color: #383838;
+  color: #dcdfe4;
+}
+
+.flex-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
