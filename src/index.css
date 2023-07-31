@@ -27,3 +27,17 @@ body {
   justify-content: center;
 }
 
+.sidebar-container {
+  width: 70px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 0px;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+

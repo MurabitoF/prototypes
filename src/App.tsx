@@ -6,10 +6,8 @@ import "allotment/dist/style.css";
 
 function App() {
   return (
-    <div
-      style={{ width: "100vw", height: "100vh"}}
-    >
-      <Allotment separator={false} >
+    <div style={{ width: "100vw", height: "100vh" }}>
+      <Allotment separator={false}>
         <Allotment.Pane minSize={70} maxSize={70}>
           <Sidebar />
         </Allotment.Pane>
@@ -23,7 +21,7 @@ function App() {
                 <Allotment.Pane>
                   <Editor language="html" />
                 </Allotment.Pane>
-                <Allotment.Pane>
+                <Allotment.Pane snap={false}>
                   <Editor language="css" />
                 </Allotment.Pane>
                 <Allotment.Pane>
@@ -39,3 +37,4 @@ function App() {
 }
 
 export default App;
+
