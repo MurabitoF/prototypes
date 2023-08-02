@@ -16,3 +16,48 @@ export type Actions = {
   updateLayout: (layout: LayoutType) => void;
   updateSettings: (key, value) => void;
 };
+
+export interface PackageRawData {
+  package: {
+    name: string,
+    scope: string,
+    version: string,
+    description: string,
+    date: string,
+    links: {
+        npm: string,
+        homepage: string,
+        repository: string,
+        bugs: string
+    },
+    author?: {
+        name: string
+    },
+    publisher: {
+        username: string,
+        email: string
+    },
+    maintainers: [
+        {
+            username: string,
+            email: string
+        }
+    ]
+},
+score: {
+    final: number,
+    detail: {
+        quality: number,
+        popularity: number,
+        maintenance: number
+    }
+},
+searchScore: number,
+highlight: string
+}
+
+export interface PackageHit {
+  name: string;
+  description: string;
+  version: string,
+}

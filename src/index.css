@@ -11,13 +11,13 @@ body {
 }
 
 .bg-dark {
-  background-color: #282c34;
+  background-color: #2D323C;
   color: #dcdfe4;
 }
 
 .bg-medium {
   background-color: #383838;
-  color: #dcdfe4;
+  color: #FFF;
 }
 
 .flex-container {
@@ -41,3 +41,34 @@ body {
   font-size: 1.5rem;
 }
 
+.sidebar-tab {
+  width: 300px;
+  height: 100vh; 
+  position: fixed;
+  left: 70px;
+  top: 0px;
+  z-index: 10;
+  padding: 20px 10px;
+  overflow: auto;
+}
+
+.sidebar-tab::-webkit-scrollbar {
+  background-color: #2D323C;
+}
+
+.sidebar-tab::-webkit-scrollbar-thumb {
+  background-color: #4E5157;
+}
+
+.sidebar-tab::-webkit-scrollbar-thumb:hover {
+  background-color: #5F6165;
+}
+
+.sidebar-tab--input {
+  width: 100%;
+  padding: 5px 10px;
+  border: 1px solid #1B1F23 ;
+  outline: none;
+  background-color: #2F363D;
+  color: #FFF;
+}
