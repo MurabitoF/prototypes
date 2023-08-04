@@ -19,4 +19,5 @@ export const DEFAULT_INITIAL_SETTINGS: Store = {
   html: "<!-- Write your html here... -->\n",
   css: "/* Write your css here... */\n",
   javascript: "// Write your javascript code here...\n",
+  lastCDNImport: ''
 };

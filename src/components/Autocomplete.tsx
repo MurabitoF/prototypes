@@ -3,6 +3,7 @@ import { type PackageHit } from "../types";
 import { useDebounce } from "../hooks/useDebounce";
 import { mapPackageData } from "../utils/mapData";
 import { useEditorStore } from "../state/store";
+import { capitalizePackageName } from "../utils/strings";
 
 const Autocomplete: React.FC = () => {
   const [packageName, setPackageName] = useState("");
@@ -26,7 +27,8 @@ const Autocomplete: React.FC = () => {
   };
 
   useEffect(() => {
-    onSearch(packageName);
+    if(packageName)
+      onSearch(packageName);
   }, [packageName]);
 
   return (
@@ -56,12 +58,12 @@ const SKYPACK_BASE_URL = "https://cdn.skypack.dev";
 
 const PackageHit: React.FC<{ hit: PackageHit }> = ({ hit }) => {
   const javascript = useEditorStore((state) => state.javascript);
-  const updateContent = useEditorStore((state) => state.updateContent);
+  const updateLastCDNImport = useEditorStore((state) => state.updateLastCDNImport);
 
   function handleClick() {
     const url = `${SKYPACK_BASE_URL}/${hit.name}`
-    const newJavascript = `import ${hit.name} from '${url}'\n${javascript}`
-    updateContent('javascript', newJavascript)
+    const newJavascript = `import ${capitalizePackageName(hit.name)} from '${url}'\n${javascript}`
+    updateLastCDNImport(newJavascript)
   }
 
   return (

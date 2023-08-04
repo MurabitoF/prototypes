@@ -72,3 +72,26 @@ body {
   background-color: #2F363D;
   color: #FFF;
 }
+
+.icon-button {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  transition: background-color 200ms ease-in-out;
+  cursor: pointer;
+}
+
+.icon-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transition: background-color 200ms ease-in-out;
+}
+
+.icon-button:active {
+  background-color: rgba(255, 255, 255, 0.5);
+  transition: background-color 100ms ease-in-out;
+}
+
+.tab-selected {
+  border-left: 5px solid rgba(255, 255, 255, 0.3);
+}

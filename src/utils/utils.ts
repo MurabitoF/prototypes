@@ -1,4 +1,10 @@
-export function buildHTML(html: string, css: string, js: string) {
+interface BuildHtmlParams {
+  html: string;
+  css: string;
+  js: string;
+}
+
+export function buildHTML({html, css, js}: BuildHtmlParams) {
   return `<!DOCTYPE html>
     <html lang="en">
       <head>

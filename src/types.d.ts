@@ -9,12 +9,14 @@ export interface Store {
   javascript: string;
   editorSettings: Partial<editor.IStandaloneEditorConstructionOptions>;
   layout: LayoutType;
+  lastCDNImport?: string;
 }
 
 export type Actions = {
   updateContent: (lang: LanguagesType, text: string) => void;
   updateLayout: (layout: LayoutType) => void;
   updateSettings: (key, value) => void;
+  updateLastCDNImport: (link: string) => void
 };
 
 export interface PackageRawData {

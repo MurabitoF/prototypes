@@ -19,6 +19,10 @@ export const useEditorStore = create<Store & Actions>()(
                     ...state.editorSettings,
                     [key]: value
                 }
+            })),
+            updateLastCDNImport: (link) => set((state) => ({
+                ...state,
+                lastCDNImport: link
             }))
         }),
         {
