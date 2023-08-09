@@ -16,50 +16,50 @@ export type Actions = {
   updateContent: (lang: LanguagesType, text: string) => void;
   updateLayout: (layout: LayoutType) => void;
   updateSettings: (key, value) => void;
-  updateLastCDNImport: (link: string) => void
+  updateLastCDNImport: (link: string) => void;
 };
 
 export interface PackageRawData {
   package: {
-    name: string,
-    scope: string,
-    version: string,
-    description: string,
-    date: string,
+    name: string;
+    scope: string;
+    version: string;
+    description: string;
+    date: string;
     links: {
-        npm: string,
-        homepage: string,
-        repository: string,
-        bugs: string
-    },
+      npm: string;
+      homepage: string;
+      repository: string;
+      bugs: string;
+    };
     author?: {
-        name: string
-    },
+      name: string;
+    };
     publisher: {
-        username: string,
-        email: string
-    },
+      username: string;
+      email: string;
+    };
     maintainers: [
-        {
-            username: string,
-            email: string
-        }
-    ]
-},
-score: {
-    final: number,
+      {
+        username: string;
+        email: string;
+      }
+    ];
+  };
+  score: {
+    final: number;
     detail: {
-        quality: number,
-        popularity: number,
-        maintenance: number
-    }
-},
-searchScore: number,
-highlight: string
+      quality: number;
+      popularity: number;
+      maintenance: number;
+    };
+  };
+  searchScore: number;
+  highlight: string;
 }
 
-export interface PackageHit {
+export interface PackageHitType {
   name: string;
   description: string;
-  version: string,
+  version: string;
 }

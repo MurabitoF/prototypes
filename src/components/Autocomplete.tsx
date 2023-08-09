@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import { type PackageHit } from "../types";
+import { type PackageHitType } from "../types";
 import { useDebounce } from "../hooks/useDebounce";
 import { mapPackageData } from "../utils/mapData";
-import { useEditorStore } from "../state/store";
-import { capitalizePackageName } from "../utils/strings";
+import PackageHit from "./PackageHit";
 
 const Autocomplete: React.FC = () => {
   const [packageName, setPackageName] = useState("");
-  const [hits, setHits] = useState<PackageHit[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [hits, setHits] = useState<PackageHitType[]>([]);
+  const [loading, setLoading] = useState(false);
   const debouncedPackageName = useDebounce(setPackageName, 300);
 
   const onSearch = (inputValue: string) => {
@@ -27,8 +26,7 @@ const Autocomplete: React.FC = () => {
   };
 
   useEffect(() => {
-    if(packageName)
-      onSearch(packageName);
+    if (packageName) onSearch(packageName);
   }, [packageName]);
 
   return (
@@ -45,8 +43,8 @@ const Autocomplete: React.FC = () => {
         placeholder="Search NPM packages"
       />
       {loading && <div>Loading...</div>}
-      <div>
-        {hits.map((hit: PackageHit) => (
+      <div className="package-hit-container">
+        {hits.map((hit: PackageHitType) => (
           <PackageHit key={hit.name} hit={hit} />
         ))}
       </div>
@@ -54,25 +52,5 @@ const Autocomplete: React.FC = () => {
   );
 };
 
-const SKYPACK_BASE_URL = "https://cdn.skypack.dev";
-
-const PackageHit: React.FC<{ hit: PackageHit }> = ({ hit }) => {
-  const javascript = useEditorStore((state) => state.javascript);
-  const updateLastCDNImport = useEditorStore((state) => state.updateLastCDNImport);
-
-  function handleClick() {
-    const url = `${SKYPACK_BASE_URL}/${hit.name}`
-    const newJavascript = `import ${capitalizePackageName(hit.name)} from '${url}'\n${javascript}`
-    updateLastCDNImport(newJavascript)
-  }
-
-  return (
-    <div onClick={handleClick}>
-      <h2>{hit.name}</h2>
-      <p>{hit.description}</p>
-      <small>Version: {hit.version}</small>
-    </div>
-  );
-};
-
 export default Autocomplete;
+

@@ -11,13 +11,13 @@ body {
 }
 
 .bg-dark {
-  background-color: #2D323C;
+  background-color: #2d323c;
   color: #dcdfe4;
 }
 
 .bg-medium {
   background-color: #383838;
-  color: #FFF;
+  color: #fff;
 }
 
 .flex-container {
@@ -43,7 +43,7 @@ body {
 
 .sidebar-tab {
   width: 300px;
-  height: 100vh; 
+  height: 100vh;
   position: fixed;
   left: 70px;
   top: 0px;
@@ -53,24 +53,25 @@ body {
 }
 
 .sidebar-tab::-webkit-scrollbar {
-  background-color: #2D323C;
+  background-color: #2d323c;
 }
 
 .sidebar-tab::-webkit-scrollbar-thumb {
-  background-color: #4E5157;
+  background-color: #4e5157;
 }
 
 .sidebar-tab::-webkit-scrollbar-thumb:hover {
-  background-color: #5F6165;
+  background-color: #5f6165;
 }
 
 .sidebar-tab--input {
   width: 100%;
   padding: 5px 10px;
-  border: 1px solid #1B1F23 ;
+  border: 1px solid #1b1f23;
   outline: none;
-  background-color: #2F363D;
-  color: #FFF;
+  background-color: #2f363d;
+  color: #fff;
+  margin-bottom: 20px;
 }
 
 .icon-button {
@@ -95,3 +96,23 @@ body {
 .tab-selected {
   border-left: 5px solid rgba(255, 255, 255, 0.3);
 }
+
+.package-hit-container {
+  display: grid;
+  gap: 10px;
+}
+
+.package-hit {
+  cursor: pointer;
+  transition: background-color 200ms ease-in-out;
+}
+
+.package-hit > * {
+  margin: 0;
+}
+
+.package-hit:hover {
+  background-color: #4e5157;
+  transition: background-color 200ms ease-in-out;
+}
+
