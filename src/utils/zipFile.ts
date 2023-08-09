@@ -15,37 +15,36 @@ interface Params {
   js: string;
 }
 
-const DEFAULT_ZIP_FILE_NAME = 'prototypes'
+const DEFAULT_ZIP_FILE_NAME = "prototypes";
 
-export async function zipProject ({
+export async function zipProject({
   html,
   css,
   js,
   zipFileName = DEFAULT_ZIP_FILE_NAME,
-  zipInSingleFile = false
+  zipInSingleFile = false,
 }: ZipProjectParams) {
-  zipFileName = zipFileName === '' ? DEFAULT_ZIP_FILE_NAME : zipFileName
+  zipFileName = zipFileName === "" ? DEFAULT_ZIP_FILE_NAME : zipFileName;
 
   const createZip = zipInSingleFile
     ? createZipWithSingleFile
-    : createZipWithMultipleFiles
+    : createZipWithMultipleFiles;
 
-  const zip = createZip({ html, css, js })
-  return generateZip({ zip, zipFileName })
+  const zip = createZip({ html, css, js });
+  return generateZip({ zip, zipFileName });
 }
 
+function createZipWithSingleFile({ html, css, js }: Params) {
+  const zip = new JSZip();
+  const indexHTML = buildHTML({ css, html, js });
 
-function createZipWithSingleFile ({ html, css, js }: Params) {
-  const zip = new JSZip()
-  const indexHTML = buildHTML({ css, html, js })
+  zip.file("index.html", indexHTML);
 
-  zip.file('index.html', indexHTML)
-
-  return zip
+  return zip;
 }
 
-function createZipWithMultipleFiles ({ html, css, js }: Params) {
-  const zip = new JSZip()
+function createZipWithMultipleFiles({ html, css, js }: Params) {
+  const zip = new JSZip();
 
   const indexHtml = `<!DOCTYPE html>
 <html lang="en">
@@ -56,22 +55,28 @@ function createZipWithMultipleFiles ({ html, css, js }: Params) {
     ${html}
     <script type="module" src="script.js"></script>
   </body>
-</html>`
+</html>`;
 
-  zip.file('style.css', css)
-  zip.file('script.js', js)
-  zip.file('index.html', indexHtml)
+  zip.file("style.css", css);
+  zip.file("script.js", js);
+  zip.file("index.html", indexHtml);
 
-  return zip
+  return zip;
 }
 
-function generateZip ({ zip, zipFileName }: {zip: JSZip, zipFileName: string}) {
-  return zip.generateAsync({ type: 'blob' }).then((blobData) => {
-    const zipBlob = new window.Blob([blobData])
-    const element = window.document.createElement('a')
+function generateZip({
+  zip,
+  zipFileName,
+}: {
+  zip: JSZip;
+  zipFileName: string;
+}) {
+  return zip.generateAsync({ type: "blob" }).then((blobData: BlobPart) => {
+    const zipBlob = new window.Blob([blobData]);
+    const element = window.document.createElement("a");
 
-    element.href = window.URL.createObjectURL(zipBlob)
-    element.download = `${zipFileName}.zip`
-    element.click()
-  })
+    element.href = window.URL.createObjectURL(zipBlob);
+    element.download = `${zipFileName}.zip`;
+    element.click();
+  });
 }
