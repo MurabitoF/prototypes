@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import Tooltip from "rc-tooltip";
 import Autocomplete from "./Autocomplete";
 import SidebarTab from "./SidebarTab";
 import IconButton from "./IconButton";
@@ -11,6 +12,7 @@ import {
 } from "./Icons";
 import { zipProject } from "../utils/zipFile";
 import { useEditorStore } from "../state/store";
+import { buildHTML } from "../utils/utils";
 
 type TabSelectedType = "editor" | "packages" | "options";
 
@@ -24,7 +26,7 @@ const Sidebar = () => {
   const [tabSelected, setTabSelected] = useState<TabSelectedType>("editor");
   const html = useEditorStore((state) => state.html);
   const css = useEditorStore((state) => state.css);
-  const javascript = useEditorStore((state) => state.javascript);
+  const js = useEditorStore((state) => state.javascript);
 
   function handleClick(tab: TabSelectedType) {
     if (tabSelected === tab) {
@@ -33,6 +35,15 @@ const Sidebar = () => {
     }
     setTabSelected(tab);
   }
+
+  const url = useMemo(() => {
+    const blob = new Blob([buildHTML({ html, css, js })], {
+      type: "text/html",
+    });
+    const url = URL.createObjectURL(blob);
+
+    return url;
+  }, [html, css, js])
 
   return (
     <section
@@ -79,11 +90,22 @@ const Sidebar = () => {
           justifyContent: "flex-end",
         }}
       >
-        <IconButton onClick={() => {}} label="Open the preview on a new tab">
-          <PreviewIcon width={32} height={32} color="#FFF" />
-        </IconButton>
+        <Tooltip
+          placement="right"
+          overlay={<span>Open the preview on a new tab</span>}
+        >
+          <a
+            className="icon-button"
+            style={{ textAlign: "center" }}
+            href={url}
+            target="_blank"
+          >
+            <PreviewIcon width={32} height={32} color="#FFF" />
+          </a>
+        </Tooltip>
+
         <IconButton
-          onClick={() => zipProject({html, css, js: javascript})}
+          onClick={() => zipProject({ html, css, js })}
           label="Download the code in a zip file"
         >
           <DownloadIcon width={32} height={32} color="#FFF" />
