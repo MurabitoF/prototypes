@@ -4,11 +4,13 @@ import DefaultLayout from './Layouts/DefaultLayout'
 import InvertedLayout from './Layouts/InvertedLayout'
 import ColumnsLayout from './Layouts/ColumnsLayout'
 import { useEditorStore } from '../../state/store'
+import RowsLayout from './Layouts/RowsLayout'
 
 const LAYOUT_TEMPLATES: Record<LayoutType, ReactNode> = {
   default: <DefaultLayout />,
   inverted: <InvertedLayout />,
-  columns: <ColumnsLayout />
+  columns: <ColumnsLayout />,
+  rows: <RowsLayout />,
 }
 
 const LayoutManager = () => {

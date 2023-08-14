@@ -1,6 +1,6 @@
 import { editor } from "monaco-editor";
 
-export type LayoutType = "default" | "inverted" | "columns";
+export type LayoutType = "default" | "inverted" | "columns" | "rows";
 export type LanguagesType = "html" | "css" | "javascript";
 
 export interface Store {
