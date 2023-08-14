@@ -1,8 +1,7 @@
 import { Allotment } from "allotment";
-import Editor from "./components/Editor";
-import Viewer from "./components/Viewer";
 import Sidebar from "./components/Sidebar";
 import "allotment/dist/style.css";
+import LayoutManager from "./components/LayoutManager/LayoutManager";
 
 function App() {
   return (
@@ -12,24 +11,7 @@ function App() {
           <Sidebar />
         </Allotment.Pane>
         <Allotment.Pane>
-          <Allotment vertical snap>
-            <Allotment.Pane>
-              <Viewer />
-            </Allotment.Pane>
-            <Allotment.Pane>
-              <Allotment snap>
-                <Allotment.Pane>
-                  <Editor language="html" />
-                </Allotment.Pane>
-                <Allotment.Pane snap={false}>
-                  <Editor language="css" />
-                </Allotment.Pane>
-                <Allotment.Pane>
-                  <Editor language="javascript" />
-                </Allotment.Pane>
-              </Allotment>
-            </Allotment.Pane>
-          </Allotment>
+          <LayoutManager />
         </Allotment.Pane>
       </Allotment>
     </div>
@@ -37,4 +19,3 @@ function App() {
 }
 
 export default App;
-
