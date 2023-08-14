@@ -2,7 +2,7 @@ import { editor } from "monaco-editor";
 
 export type LayoutType = "default" | "inverted" | "columns" | "rows";
 export type LanguagesType = "html" | "css" | "javascript";
-
+export type ThemeType = "light" | "vs-dark"
 export interface Store {
   html: string;
   css: string;
@@ -10,7 +10,7 @@ export interface Store {
   editorSettings: Partial<editor.IStandaloneEditorConstructionOptions>;
   layout: LayoutType;
   lastCDNImport?: string;
-  theme: "light" | "vs-dark";
+  theme: ThemeType;
 }
 
 export type Actions = {

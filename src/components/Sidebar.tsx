@@ -13,13 +13,14 @@ import {
 import { zipProject } from "../utils/zipFile";
 import { useEditorStore } from "../state/store";
 import { buildHTML } from "../utils/utils";
+import SettingsTab from "./SettingsTab";
 
 type TabSelectedType = "editor" | "packages" | "options";
 
 const TAB_RENDER_COMPONENT = {
   editor: null,
   packages: <Autocomplete />,
-  options: "make editor option tab",
+  options: <SettingsTab />,
 };
 
 const Sidebar = () => {
