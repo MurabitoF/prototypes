@@ -10,7 +10,7 @@ const DEFAULT_EDITOR_SETTINGS: editor.IStandaloneEditorConstructionOptions =
     minimap: {
       enabled: false,
     },
-    wordWrap: "on"
+    wordWrap: "on",
   };
 
 export const DEFAULT_INITIAL_SETTINGS: Store = {
@@ -19,5 +19,6 @@ export const DEFAULT_INITIAL_SETTINGS: Store = {
   html: "<!-- Write your html here... -->\n",
   css: "/* Write your css here... */\n",
   javascript: "// Write your javascript code here...\n",
-  lastCDNImport: ''
+  lastCDNImport: '',
+  theme: "vs-dark"
 };

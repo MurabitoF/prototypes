@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { type Monaco } from "@monaco-editor/react/dist/index";
-import { Position, editor } from 'monaco-editor';
+import { editor } from 'monaco-editor';
 import { type LanguagesType } from "../types";
 import { emmetHTML, emmetCSS, emmetJSX } from "emmet-monaco-es";
 import { Editor as MonacoEditor } from "@monaco-editor/react";
@@ -14,6 +14,7 @@ interface Props {
 
 const Editor: React.FC<Props> = ({ language }) => {
   const editorProps = useEditorStore((state) => state.editorSettings);
+  const theme = useEditorStore((state) => state.theme);
   const editorValue = useEditorStore((state) => state[language]);
   const lastCDNImport = useEditorStore((state) => state.lastCDNImport);
   const updateContent = useEditorStore((state) => state.updateContent);
@@ -28,10 +29,7 @@ const Editor: React.FC<Props> = ({ language }) => {
 
   useEffect(() => {
     if(language === 'javascript') {
-      // const pos = editorRef.current?.getPosition()
-      // const newPosition = new Position(pos!.lineNumber + 1, pos!.column)
       editorRef.current?.setValue(lastCDNImport!)
-      // editorRef.current?.setPosition(newPosition)
       editorRef.current?.focus()
     }
   }, [lastCDNImport])
@@ -50,7 +48,7 @@ const Editor: React.FC<Props> = ({ language }) => {
           beforeMount={handleEditorWillMount}
           onMount={(editor) => editorRef.current = editor}
           onChange={(value) => debouncedOnChange(language, value)}
-          theme="vs-dark"
+          theme={theme}
           options={{ ...editorProps }}
         />
       </Allotment.Pane>

@@ -10,11 +10,13 @@ export interface Store {
   editorSettings: Partial<editor.IStandaloneEditorConstructionOptions>;
   layout: LayoutType;
   lastCDNImport?: string;
+  theme: "light" | "vs-dark";
 }
 
 export type Actions = {
   updateContent: (lang: LanguagesType, text: string) => void;
   updateLayout: (layout: LayoutType) => void;
+  updateTheme: (theme: "light" | "vs-dark") => void;
   updateSettings: (key, value) => void;
   updateLastCDNImport: (link: string) => void;
 };

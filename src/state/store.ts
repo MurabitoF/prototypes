@@ -13,6 +13,7 @@ export const useEditorStore = create<Store & Actions>()(
                 set((state) => ({...state, [lang]: text}))
             },
             updateLayout: (newLayout) => set((state) => ({...state, layout: newLayout})),
+            updateTheme: (newTheme) => set((state) => ({...state, theme: newTheme})),
             updateSettings: (key, value) => set((state) => ({
                 ...state,
                 editorSettings: {
