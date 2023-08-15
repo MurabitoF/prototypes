@@ -26,6 +26,7 @@ const SettingsTab = () => {
       >
         <select
           id="layout-select"
+          className="sidebar-tab--input"
           value={layout}
           onChange={(event) => updateLayout(event.target.value as LayoutType)}
         >
@@ -43,6 +44,7 @@ const SettingsTab = () => {
       >
         <select
           id="theme-select"
+          className="sidebar-tab--input"
           value={theme}
           onChange={(event) => updateTheme(event.target.value as ThemeType)}
         >
@@ -59,6 +61,7 @@ const SettingsTab = () => {
       >
         <select
           id="line-number-select"
+          className="sidebar-tab--input"
           value={editorSettings.lineNumbers?.toString()}
           onChange={(event) =>
             updateSettings("lineNumbers", event.target.value)
@@ -78,6 +81,7 @@ const SettingsTab = () => {
       >
         <select
           id="word-wrap-select"
+          className="sidebar-tab--input"
           value={editorSettings.wordWrap}
           onChange={(event) => updateSettings("wordWrap", event.target.value)}
         >
@@ -95,6 +99,7 @@ const SettingsTab = () => {
       >
         <input
           id="font-size-input"
+          className="sidebar-tab--input"
           type="number"
           value={editorSettings.fontSize}
           onChange={(event) =>
@@ -110,6 +115,7 @@ const SettingsTab = () => {
       >
         <input
           id="tab-size-input"
+          className="sidebar-tab--input"
           type="number"
           value={editorSettings.tabSize}
           onChange={(event) =>
@@ -156,6 +162,7 @@ const SettingsTab = () => {
       >
         <input
           id="file-name-input"
+          className="sidebar-tab--input"
           type="text"
           value={fileName}
           onChange={(event) => updateFileName(event.target.value)}
