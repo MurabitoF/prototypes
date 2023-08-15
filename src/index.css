@@ -18,6 +18,11 @@ body {
 .bg-medium {
   background-color: #383838;
   color: #fff;
+
+}
+.bg-medium-light {
+  background-color: #b8b8b8;
+  color: #000;
 }
 
 .flex-container {
@@ -116,3 +121,16 @@ body {
   transition: background-color 200ms ease-in-out;
 }
 
+.item-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 5px;
+  margin-bottom: 10px;
+  transition: background-color 200ms ease-in-out;
+}
+
+.item-settings:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transition: background-color 200ms ease-in-out;
+}

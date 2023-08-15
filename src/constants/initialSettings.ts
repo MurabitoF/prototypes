@@ -4,6 +4,7 @@ import { type Store } from "../types";
 const DEFAULT_EDITOR_SETTINGS: editor.IStandaloneEditorConstructionOptions =
   {
     fontFamily: "Cascadia Code, monospace",
+    fontSize: 16,
     fontLigatures: true,
     lineNumbers: "off",
     tabSize: 2,
@@ -20,5 +21,7 @@ export const DEFAULT_INITIAL_SETTINGS: Store = {
   css: "/* Write your css here... */\n",
   javascript: "// Write your javascript code here...\n",
   lastCDNImport: '',
-  theme: "vs-dark"
+  theme: "vs-dark",
+  fileName: "prototypes",
+  inOneFile: false
 };

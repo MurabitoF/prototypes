@@ -11,14 +11,18 @@ export interface Store {
   layout: LayoutType;
   lastCDNImport?: string;
   theme: ThemeType;
+  fileName: string;
+  inOneFile: boolean;
 }
 
 export type Actions = {
   updateContent: (lang: LanguagesType, text: string) => void;
   updateLayout: (layout: LayoutType) => void;
-  updateTheme: (theme: "light" | "vs-dark") => void;
+  updateTheme: (theme: ThemeType) => void;
   updateSettings: (key, value) => void;
   updateLastCDNImport: (link: string) => void;
+  updateFileName: (newFileName: string) => void;
+  updateInOneFile: (value: boolean) => void
 };
 
 export interface PackageRawData {
