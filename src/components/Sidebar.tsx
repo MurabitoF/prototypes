@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { ReactNode, useMemo, useState } from "react";
 import Tooltip from "rc-tooltip";
 import Autocomplete from "./Autocomplete";
 import SidebarTab from "./SidebarTab";
@@ -17,7 +17,7 @@ import SettingsTab from "./SettingsTab";
 
 type TabSelectedType = "editor" | "packages" | "options";
 
-const TAB_RENDER_COMPONENT = {
+const TAB_RENDER_COMPONENT: Record<string, ReactNode> = {
   editor: null,
   packages: <Autocomplete />,
   options: <SettingsTab />,

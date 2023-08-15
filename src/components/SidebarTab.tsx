@@ -1,11 +1,17 @@
+import React, { ReactNode } from "react";
+
 interface Props {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const SidebarTab: React.FC<Props> = ({ children }) => {
-  if(children === null) return
+  if(children === null || children === undefined) return <></>
 
-  return <div className="sidebar-tab bg-dark">{children}</div>;
+  return (
+    <div className="sidebar-tab bg-dark">
+      {children}
+    </div>
+  );
 };
 
 export default SidebarTab;

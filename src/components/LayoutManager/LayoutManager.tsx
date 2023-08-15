@@ -16,7 +16,11 @@ const LAYOUT_TEMPLATES: Record<LayoutType, ReactNode> = {
 const LayoutManager = () => {
   const layout = useEditorStore(state => state.layout)
 
-  return LAYOUT_TEMPLATES[layout]
+  return (
+    <>
+      {LAYOUT_TEMPLATES[layout]}
+    </>
+  )
 }
 
 export default LayoutManager
