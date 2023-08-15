@@ -12,7 +12,7 @@ const ItemSetting: React.FC<Props> = ({ id, label, title, subtitle, children}) =
   return (
     <section className="item-settings">
         <strong>
-          <span>{label} </span>
+          <span className="item-setting--label">{label} </span>
           {title}
         </strong>
         {subtitle}
