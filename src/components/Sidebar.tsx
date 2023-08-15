@@ -28,6 +28,8 @@ const Sidebar = () => {
   const html = useEditorStore((state) => state.html);
   const css = useEditorStore((state) => state.css);
   const js = useEditorStore((state) => state.javascript);
+  const zipFileName = useEditorStore((state) => state.fileName);
+  const zipInSingleFile = useEditorStore((state) => state.inOneFile);
 
   function handleClick(tab: TabSelectedType) {
     if (tabSelected === tab) {
@@ -106,7 +108,7 @@ const Sidebar = () => {
         </Tooltip>
 
         <IconButton
-          onClick={() => zipProject({ html, css, js })}
+          onClick={() => zipProject({ html, css, js, zipFileName, zipInSingleFile })}
           label="Download the code in a zip file"
         >
           <DownloadIcon width={32} height={32} color="#FFF" />
