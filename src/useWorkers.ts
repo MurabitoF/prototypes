@@ -24,3 +24,6 @@ self.MonacoEnvironment = {
 
 monaco.typescript.typescriptDefaults.setEagerModelSync(true);
 loader.config({ monaco });
+
+// Monaco measures glyphs on mount; re-measure once the web font arrives
+document.fonts.load('16px "Cascadia Code"').then(() => monaco.editor.remeasureFonts());

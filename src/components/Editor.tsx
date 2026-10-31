@@ -24,14 +24,13 @@ const Editor: React.FC<Props> = ({ language }) => {
   }
 
   return (
-    <Allotment
-      vertical
-      separator={false}
-      className={theme === "light" ? "bg-medium-light" : "bg-medium"}
-    >
-      <Allotment.Pane minSize={20} maxSize={20}>
-        <div className="flex-container">
-          <div>{language.toLocaleUpperCase()}</div>
+    <Allotment vertical separator={false}>
+      <Allotment.Pane minSize={26} maxSize={26}>
+        <div
+          className="editor-header"
+          style={{ "--lang-color": `var(--${language})` } as React.CSSProperties}
+        >
+          {language.toUpperCase()}
         </div>
       </Allotment.Pane>
       <Allotment.Pane>

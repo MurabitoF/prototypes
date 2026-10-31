@@ -10,11 +10,12 @@ const PreviewIcon: React.FC<SVGProps<SVGSVGElement>> = ({
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
       className="icon icon-tabler icon-tabler-external-link"
       width={width}
       height={height}
       viewBox="0 0 24 24"
-      stroke-width={stroke}
+      strokeWidth={stroke}
       stroke={color}
       fill={fill}
       strokeLinecap="round"

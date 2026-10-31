@@ -8,7 +8,7 @@ const SidebarTab: React.FC<Props> = ({ children }) => {
   if(children === null || children === undefined) return <></>
 
   return (
-    <div className="sidebar-tab bg-dark">
+    <div className="sidebar-tab">
       {children}
     </div>
   );

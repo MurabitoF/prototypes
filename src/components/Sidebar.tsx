@@ -47,28 +47,16 @@ const Sidebar = () => {
   }
 
   return (
-    <section
-      className="sidebar-container bg-dark"
-      style={{ overflow: "visible" }}
-    >
+    <nav className="sidebar-container">
       <span className="logo">Pty</span>
 
-      <div
-        style={{
-          width: "100%",
-          height: "50%",
-          marginTop: 20,
-          display: "flex",
-          flexDirection: "column",
-          gap: 30,
-        }}
-      >
+      <div className="sidebar-group">
         <IconButton
           onClick={() => handleClick("editor")}
           label="Editor"
           isSelected={tabSelected === "editor"}
         >
-          <EditorIcon width={32} height={32} color="#FFF" />
+          <EditorIcon width={32} height={32} />
         </IconButton>
 
         <IconButton
@@ -76,42 +64,32 @@ const Sidebar = () => {
           label="NPM Packages"
           isSelected={tabSelected === "packages"}
         >
-          <PackagesIcon width={32} height={32} color="#FFF" />
+          <PackagesIcon width={32} height={32} />
         </IconButton>
       </div>
 
-      <div
-        style={{
-          width: "100%",
-          height: "50%",
-          marginTop: 20,
-          display: "flex",
-          flexDirection: "column",
-          gap: 50,
-          justifyContent: "flex-end",
-        }}
-      >
+      <div className="sidebar-group sidebar-group--bottom">
         <IconButton onClick={openPreview} label="Open the preview on a new tab">
-          <PreviewIcon width={32} height={32} color="#FFF" />
+          <PreviewIcon width={32} height={32} />
         </IconButton>
 
         <IconButton
           onClick={downloadZip}
           label="Download the code in a zip file"
         >
-          <DownloadIcon width={32} height={32} color="#FFF" />
+          <DownloadIcon width={32} height={32} />
         </IconButton>
         <IconButton
           onClick={() => handleClick("options")}
           label="Editor Settings"
           isSelected={tabSelected === "options"}
         >
-          <SettingsIcon width={32} height={32} color="#FFF" />
+          <SettingsIcon width={32} height={32} />
         </IconButton>
       </div>
 
       <SidebarTab>{TAB_RENDER_COMPONENT[tabSelected]}</SidebarTab>
-    </section>
+    </nav>
   );
 };
 

@@ -38,8 +38,8 @@ const Autocomplete: React.FC = () => {
 
   return (
     <div>
-      <p style={{ marginTop: 0 }}>
-        <strong style={{ display: "block" }}>JavaScript: Add dependency</strong>
+      <p style={{ marginTop: 0, fontSize: "0.9rem" }}>
+        <strong className="sidebar-tab--title">Add dependency</strong>
         An import statement will be added to the top of the JavaScript editor
         for the package.
       </p>
