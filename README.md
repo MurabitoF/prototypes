@@ -1,6 +1,6 @@
-# Protoptypes
+# Prototypes
 
-A playgrownd for build simple html, css and javascript
+A playground to build simple HTML, CSS and JavaScript prototypes
 
 
 ## Demo
