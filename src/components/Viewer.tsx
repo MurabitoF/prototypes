@@ -53,6 +53,8 @@ const Viewer = () => {
         <iframe
           ref={iframeRef}
           title="Preview"
+          // no allow-same-origin: shared code can't touch the app's storage
+          sandbox="allow-scripts allow-modals allow-forms allow-popups"
           width="100%"
           height="100%"
           style={{ border: "none", background: "#fff" }}
