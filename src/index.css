@@ -221,3 +221,59 @@ body {
   border-radius: 50%;
   background-color: var(--lang-color);
 }
+
+/* Console */
+
+.console {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-header);
+  border-top: 1px solid var(--border);
+}
+
+.console-header {
+  height: 26px;
+  flex-shrink: 0;
+  --lang-color: var(--fg-muted);
+}
+
+.console-clear {
+  margin-left: auto;
+  padding: 2px 8px;
+  border: none;
+  border-radius: 4px;
+  font: inherit;
+  color: var(--fg-muted);
+  background: transparent;
+  cursor: pointer;
+}
+
+.console-clear:hover {
+  color: var(--fg);
+  background-color: var(--hover);
+}
+
+.console-body {
+  flex: 1;
+  overflow: auto;
+}
+
+.console-line {
+  margin: 0;
+  padding: 3px 10px;
+  font: 13px "Cascadia Code", monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+  border-bottom: 1px solid var(--border);
+}
+
+.console-warn {
+  color: #e0a526;
+  background-color: rgba(224, 165, 38, 0.08);
+}
+
+.console-error {
+  color: #f0605b;
+  background-color: rgba(240, 96, 91, 0.08);
+}

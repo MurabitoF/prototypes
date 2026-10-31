@@ -5,6 +5,7 @@ import IconButton from "./IconButton";
 import {
   DownloadIcon,
   EditorIcon,
+  LinkIcon,
   PackagesIcon,
   PreviewIcon,
   SettingsIcon,
@@ -13,6 +14,7 @@ import { zipProject } from "../utils/zipFile";
 import { useEditorStore } from "../state/store";
 import { buildHTML } from "../utils/utils";
 import SettingsTab from "./SettingsTab";
+import { encodeCode } from "../utils/share";
 
 type TabSelectedType = "editor" | "packages" | "options";
 
@@ -24,6 +26,7 @@ const TAB_RENDER_COMPONENT: Record<string, ReactNode> = {
 
 const Sidebar = () => {
   const [tabSelected, setTabSelected] = useState<TabSelectedType>("editor");
+  const [linkCopied, setLinkCopied] = useState(false);
 
   function handleClick(tab: TabSelectedType) {
     if (tabSelected === tab) {
@@ -39,6 +42,14 @@ const Sidebar = () => {
     const url = URL.createObjectURL(blob);
     window.open(url, "_blank");
     setTimeout(() => URL.revokeObjectURL(url), 10_000);
+  }
+
+  async function copyShareLink() {
+    const { html, css, javascript } = useEditorStore.getState();
+    const code = await encodeCode({ html, css, javascript });
+    await navigator.clipboard.writeText(`${location.origin}${location.pathname}#code=${code}`);
+    setLinkCopied(true);
+    setTimeout(() => setLinkCopied(false), 2000);
   }
 
   function downloadZip() {
@@ -69,6 +80,12 @@ const Sidebar = () => {
       </div>
 
       <div className="sidebar-group sidebar-group--bottom">
+        <IconButton
+          onClick={copyShareLink}
+          label={linkCopied ? "Link copied!" : "Copy a share link"}
+        >
+          <LinkIcon width={32} height={32} />
+        </IconButton>
         <IconButton onClick={openPreview} label="Open the preview on a new tab">
           <PreviewIcon width={32} height={32} />
         </IconButton>
