@@ -19,7 +19,7 @@ const Editor: React.FC<Props> = ({ language }) => {
   const lastCDNImport = useEditorStore((state) => state.lastCDNImport);
   const updateContent = useEditorStore((state) => state.updateContent);
   const debouncedOnChange = useDebounce(updateContent, 500);
-  const editorRef = useRef<editor.IStandaloneCodeEditor>();
+  const editorRef = useRef<editor.IStandaloneCodeEditor>(null);
 
   function handleEditorWillMount(monaco: Monaco) {
     emmetHTML(monaco);
