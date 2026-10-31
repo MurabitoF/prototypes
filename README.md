@@ -1,6 +1,6 @@
-# Protoptypes
+# Prototypes
 
-A playgrownd for build simple html, css and javascript
+A playground to build simple HTML, CSS and JavaScript prototypes
 
 
 ## Demo
@@ -8,6 +8,13 @@ A playgrownd for build simple html, css and javascript
 https://prototypes-gamma.vercel.app/
 
 ![Prototypes image](https://gcdnb.pbrd.co/images/eYo7Fummox7z.png?o=1)
+## Features
+
+- HTML, CSS and JavaScript editors (Monaco + Emmet) with live preview and console
+- Add npm packages as ES module imports (via esm.sh)
+- Share your prototype with a link (code is compressed into the URL)
+- Download as zip, four layouts, dark and light themes
+
 ## Getting Started
 
 Install the dependencies

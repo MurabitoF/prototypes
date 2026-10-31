@@ -17,7 +17,7 @@ const SettingsTab = () => {
   } = useEditorStore();
 
   return (
-    <form>
+    <form style={{ display: "grid", gap: 4 }}>
       <ItemSetting
         id="layout-select"
         label="Editor:"
@@ -49,8 +49,7 @@ const SettingsTab = () => {
           onChange={(event) => updateTheme(event.target.value as ThemeType)}
         >
           <option value="vs-dark">Dark Theme</option>
-          {/* Esta roto ver porque */}
-          {/* <option value="light">Light Theme</option> */}
+          <option value="light">Light Theme</option>
         </select>
       </ItemSetting>
       <ItemSetting

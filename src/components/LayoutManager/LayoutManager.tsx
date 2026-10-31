@@ -1,26 +1,44 @@
-import { ReactNode } from 'react'
-import {type LayoutType} from '../../types'
-import DefaultLayout from './Layouts/DefaultLayout'
-import InvertedLayout from './Layouts/InvertedLayout'
-import ColumnsLayout from './Layouts/ColumnsLayout'
-import { useEditorStore } from '../../state/store'
-import RowsLayout from './Layouts/RowsLayout'
+import { Allotment } from "allotment";
+import Editor from "../Editor";
+import Viewer from "../Viewer";
+import { useEditorStore } from "../../state/store";
+import { type LanguagesType } from "../../types";
 
-const LAYOUT_TEMPLATES: Record<LayoutType, ReactNode> = {
-  default: <DefaultLayout />,
-  inverted: <InvertedLayout />,
-  columns: <ColumnsLayout />,
-  rows: <RowsLayout />,
-}
+const LANGUAGES: LanguagesType[] = ["html", "css", "javascript"];
 
 const LayoutManager = () => {
-  const layout = useEditorStore(state => state.layout)
+  const layout = useEditorStore((state) => state.layout);
 
+  const editors = LANGUAGES.map((language) => (
+    <Allotment.Pane key={language} snap={language !== "css"}>
+      <Editor language={language} />
+    </Allotment.Pane>
+  ));
+  const viewer = (
+    <Allotment.Pane key="viewer">
+      <Viewer />
+    </Allotment.Pane>
+  );
+
+  if (layout === "columns" || layout === "rows") {
+    return (
+      <Allotment key={layout} vertical={layout === "rows"} snap>
+        {editors}
+        {viewer}
+      </Allotment>
+    );
+  }
+
+  const editorsRow = (
+    <Allotment.Pane key="editors">
+      <Allotment snap>{editors}</Allotment>
+    </Allotment.Pane>
+  );
   return (
-    <>
-      {LAYOUT_TEMPLATES[layout]}
-    </>
-  )
-}
+    <Allotment key={layout} vertical snap>
+      {layout === "default" ? [viewer, editorsRow] : [editorsRow, viewer]}
+    </Allotment>
+  );
+};
 
-export default LayoutManager
+export default LayoutManager;

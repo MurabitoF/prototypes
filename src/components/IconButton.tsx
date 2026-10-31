@@ -10,7 +10,13 @@ interface Props {
 const IconButton: React.FC<Props> = ({ children, label, onClick, isSelected }) => {
   return (
     <Tooltip placement='right' overlay={<span>{label}</span>}>
-      <button onClick={onClick} className={`icon-button ${isSelected ? "tab-selected" : ""}`}>
+      <button
+        type="button"
+        aria-label={label}
+        aria-pressed={isSelected}
+        onClick={onClick}
+        className={`icon-button ${isSelected ? "tab-selected" : ""}`}
+      >
         {children}
       </button>
     </Tooltip>

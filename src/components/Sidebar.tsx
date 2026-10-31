@@ -1,11 +1,11 @@
-import { ReactNode, useMemo, useState } from "react";
-import Tooltip from "rc-tooltip";
+import { ReactNode, useState } from "react";
 import Autocomplete from "./Autocomplete";
 import SidebarTab from "./SidebarTab";
 import IconButton from "./IconButton";
 import {
   DownloadIcon,
   EditorIcon,
+  LinkIcon,
   PackagesIcon,
   PreviewIcon,
   SettingsIcon,
@@ -14,6 +14,7 @@ import { zipProject } from "../utils/zipFile";
 import { useEditorStore } from "../state/store";
 import { buildHTML } from "../utils/utils";
 import SettingsTab from "./SettingsTab";
+import { encodeCode } from "../utils/share";
 
 type TabSelectedType = "editor" | "packages" | "options";
 
@@ -25,11 +26,7 @@ const TAB_RENDER_COMPONENT: Record<string, ReactNode> = {
 
 const Sidebar = () => {
   const [tabSelected, setTabSelected] = useState<TabSelectedType>("editor");
-  const html = useEditorStore((state) => state.html);
-  const css = useEditorStore((state) => state.css);
-  const js = useEditorStore((state) => state.javascript);
-  const zipFileName = useEditorStore((state) => state.fileName);
-  const zipInSingleFile = useEditorStore((state) => state.inOneFile);
+  const [linkCopied, setLinkCopied] = useState(false);
 
   function handleClick(tab: TabSelectedType) {
     if (tabSelected === tab) {
@@ -39,38 +36,38 @@ const Sidebar = () => {
     setTabSelected(tab);
   }
 
-  const url = useMemo(() => {
-    const blob = new Blob([buildHTML({ html, css, js })], {
-      type: "text/html",
-    });
+  function openPreview() {
+    const { html, css, javascript: js } = useEditorStore.getState();
+    const blob = new Blob([buildHTML({ html, css, js })], { type: "text/html" });
     const url = URL.createObjectURL(blob);
+    window.open(url, "_blank");
+    setTimeout(() => URL.revokeObjectURL(url), 10_000);
+  }
 
-    return url;
-  }, [html, css, js])
+  async function copyShareLink() {
+    const { html, css, javascript } = useEditorStore.getState();
+    const code = await encodeCode({ html, css, javascript });
+    await navigator.clipboard.writeText(`${location.origin}${location.pathname}#code=${code}`);
+    setLinkCopied(true);
+    setTimeout(() => setLinkCopied(false), 2000);
+  }
+
+  function downloadZip() {
+    const { html, css, javascript: js, fileName, inOneFile } = useEditorStore.getState();
+    zipProject({ html, css, js, zipFileName: fileName, zipInSingleFile: inOneFile });
+  }
 
   return (
-    <section
-      className="sidebar-container bg-dark"
-      style={{ overflow: "visible" }}
-    >
+    <nav className="sidebar-container">
       <span className="logo">Pty</span>
 
-      <div
-        style={{
-          width: "100%",
-          height: "50%",
-          marginTop: 20,
-          display: "flex",
-          flexDirection: "column",
-          gap: 30,
-        }}
-      >
+      <div className="sidebar-group">
         <IconButton
           onClick={() => handleClick("editor")}
           label="Editor"
           isSelected={tabSelected === "editor"}
         >
-          <EditorIcon width={32} height={32} color="#FFF" />
+          <EditorIcon width={32} height={32} />
         </IconButton>
 
         <IconButton
@@ -78,52 +75,38 @@ const Sidebar = () => {
           label="NPM Packages"
           isSelected={tabSelected === "packages"}
         >
-          <PackagesIcon width={32} height={32} color="#FFF" />
+          <PackagesIcon width={32} height={32} />
         </IconButton>
       </div>
 
-      <div
-        style={{
-          width: "100%",
-          height: "50%",
-          marginTop: 20,
-          display: "flex",
-          flexDirection: "column",
-          gap: 50,
-          justifyContent: "flex-end",
-        }}
-      >
-        <Tooltip
-          placement="right"
-          overlay={<span>Open the preview on a new tab</span>}
+      <div className="sidebar-group sidebar-group--bottom">
+        <IconButton
+          onClick={copyShareLink}
+          label={linkCopied ? "Link copied!" : "Copy a share link"}
         >
-          <a
-            className="icon-button"
-            style={{ textAlign: "center" }}
-            href={url}
-            target="_blank"
-          >
-            <PreviewIcon width={32} height={32} color="#FFF" />
-          </a>
-        </Tooltip>
+          <LinkIcon width={32} height={32} />
+        </IconButton>
+        <IconButton onClick={openPreview} label="Open the preview on a new tab">
+          <PreviewIcon width={32} height={32} />
+        </IconButton>
 
         <IconButton
-          onClick={() => zipProject({ html, css, js, zipFileName, zipInSingleFile })}
+          onClick={downloadZip}
           label="Download the code in a zip file"
         >
-          <DownloadIcon width={32} height={32} color="#FFF" />
+          <DownloadIcon width={32} height={32} />
         </IconButton>
         <IconButton
           onClick={() => handleClick("options")}
           label="Editor Settings"
           isSelected={tabSelected === "options"}
         >
-          <SettingsIcon width={32} height={32} color="#FFF" />
+          <SettingsIcon width={32} height={32} />
         </IconButton>
       </div>
 
       <SidebarTab>{TAB_RENDER_COMPONENT[tabSelected]}</SidebarTab>
-    </section>
+    </nav>
   );
 };
 

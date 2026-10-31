@@ -10,34 +10,42 @@ const Autocomplete: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const debouncedPackageName = useDebounce(setPackageName, 300);
 
-  const onSearch = (inputValue: string) => {
+  useEffect(() => {
+    if (!packageName) {
+      setHits([]);
+      return;
+    }
+    const controller = new AbortController();
     setLoading(true);
 
-    fetch(`https://api.npms.io/v2/search/suggestions?q=${inputValue}`)
+    fetch(
+      `https://api.npms.io/v2/search/suggestions?q=${encodeURIComponent(packageName)}`,
+      { signal: controller.signal }
+    )
       .then((response) => response.json())
-      .then((rawData) => mapPackageData(rawData))
-      .then((mappedData) => setHits(mappedData))
+      .then((rawData) => setHits(mapPackageData(rawData)))
       .catch((error) => {
-        console.error("Error fetching NPM packages:", error);
+        if (error.name !== "AbortError") {
+          console.error("Error fetching NPM packages:", error);
+        }
       })
       .finally(() => {
-        setLoading(false);
+        if (!controller.signal.aborted) setLoading(false);
       });
-  };
 
-  useEffect(() => {
-    if (packageName) onSearch(packageName);
+    return () => controller.abort();
   }, [packageName]);
 
   return (
     <div>
-      <p style={{ marginTop: 0 }}>
-        <strong style={{ display: "block" }}>JavaScript: Add dependency</strong>
+      <p style={{ marginTop: 0, fontSize: "0.9rem" }}>
+        <strong className="sidebar-tab--title">Add dependency</strong>
         An import statement will be added to the top of the JavaScript editor
         for the package.
       </p>
       <input
-        type="text"
+        type="search"
+        aria-label="Search NPM packages"
         className="sidebar-tab--input"
         onChange={(event) => debouncedPackageName(event.target.value)}
         placeholder="Search NPM packages"

@@ -11,15 +11,14 @@ interface Props {
 const ItemSetting: React.FC<Props> = ({ id, label, title, subtitle, children}) => {
   return (
     <section className="item-settings">
-        <strong>
-          <span className="item-setting--label">{label} </span>
-          {title}
-        </strong>
-        {subtitle}
-        <div>
-          <label htmlFor={id} />
-          {children}
-        </div>
+        <label htmlFor={id}>
+          <strong>
+            <span className="item-setting--label">{label} </span>
+            {title}
+          </strong>
+        </label>
+        <span className="item-setting--subtitle">{subtitle}</span>
+        <div>{children}</div>
       </section>
   )
 }

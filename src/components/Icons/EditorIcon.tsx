@@ -10,14 +10,15 @@ const EditorIcon: React.FC<SVGProps<SVGSVGElement>> = ({
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
       width={width}
       height={height}
       viewBox="0 0 24 24"
-      stroke-width={stroke}
+      strokeWidth={stroke}
       stroke={color}
       fill={fill}
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M15 3v4a1 1 0 0 0 1 1h4"></path>
