@@ -1,31 +1,30 @@
-import { useEditorStore } from "../state/store";
+import { editor } from "monaco-editor";
 import { capitalizePackageName } from "../utils/strings";
 import { type PackageHitType } from "../types";
 
-const SKYPACK_BASE_URL = "https://cdn.skypack.dev";
+const CDN_BASE_URL = "https://esm.sh";
 
 const PackageHit: React.FC<{ hit: PackageHitType }> = ({ hit }) => {
-  const javascript = useEditorStore((state) => state.javascript);
-  const updateLastCDNImport = useEditorStore(
-    (state) => state.updateLastCDNImport
-  );
-
   function handleClick() {
-    const url = `${SKYPACK_BASE_URL}/${hit.name}`;
-    const newJavascript = `import ${capitalizePackageName(
-      hit.name
-    )} from '${url}'\n${javascript}`;
-    updateLastCDNImport(newJavascript);
+    const jsEditor = editor
+      .getEditors()
+      .find((e) => e.getModel()?.getLanguageId() === "javascript");
+    if (!jsEditor) return;
+
+    const text = `import ${capitalizePackageName(hit.name)} from '${CDN_BASE_URL}/${hit.name}'\n`;
+    jsEditor.executeEdits("add-package", [
+      { range: { startLineNumber: 1, startColumn: 1, endLineNumber: 1, endColumn: 1 }, text },
+    ]);
+    jsEditor.focus();
   }
 
   return (
-    <div className="package-hit" onClick={handleClick}>
+    <button type="button" className="package-hit" onClick={handleClick}>
       <h2>{hit.name}</h2>
       <p>{hit.description}</p>
       <small>Version: {hit.version}</small>
-    </div>
+    </button>
   );
 };
 
 export default PackageHit;
-

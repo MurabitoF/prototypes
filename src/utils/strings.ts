@@ -1,7 +1,6 @@
 export function capitalizePackageName(packageName: string) {
-    const splitName = packageName.split('-');
-    const capitalized = splitName.map(word => {
-        return word.slice(0, 1).toUpperCase() + word.slice(1)
-    })
-    return capitalized.join('');
+  return packageName
+    .split(/[^a-zA-Z0-9]+/)
+    .map((word) => word.slice(0, 1).toUpperCase() + word.slice(1))
+    .join("");
 }

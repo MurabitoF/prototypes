@@ -108,6 +108,9 @@ body {
 }
 
 .package-hit {
+  all: unset;
+  display: block;
+  padding: 5px;
   cursor: pointer;
   transition: background-color 200ms ease-in-out;
 }

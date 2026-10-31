@@ -9,7 +9,6 @@ export interface Store {
   javascript: string;
   editorSettings: Partial<editor.IStandaloneEditorConstructionOptions>;
   layout: LayoutType;
-  lastCDNImport?: string;
   theme: ThemeType;
   fileName: string;
   inOneFile: boolean;
@@ -20,7 +19,6 @@ export type Actions = {
   updateLayout: (layout: LayoutType) => void;
   updateTheme: (theme: ThemeType) => void;
   updateSettings: (key, value) => void;
-  updateLastCDNImport: (link: string) => void;
   updateFileName: (newFileName: string) => void;
   updateInOneFile: (value: boolean) => void
 };

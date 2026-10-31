@@ -23,11 +23,6 @@ export const useEditorStore = create<Store & Actions>()(
               [key]: value,
             },
           })),
-        updateLastCDNImport: (link) =>
-          set((state) => ({
-            ...state,
-            lastCDNImport: link,
-          })),
         updateFileName: (newFileName) =>
           set((state) => ({ ...state, fileName: newFileName })),
         updateInOneFile: (value) =>

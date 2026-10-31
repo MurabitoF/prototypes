@@ -1,5 +1,4 @@
-import { ReactNode, useMemo, useState } from "react";
-import Tooltip from "rc-tooltip";
+import { ReactNode, useState } from "react";
 import Autocomplete from "./Autocomplete";
 import SidebarTab from "./SidebarTab";
 import IconButton from "./IconButton";
@@ -25,11 +24,6 @@ const TAB_RENDER_COMPONENT: Record<string, ReactNode> = {
 
 const Sidebar = () => {
   const [tabSelected, setTabSelected] = useState<TabSelectedType>("editor");
-  const html = useEditorStore((state) => state.html);
-  const css = useEditorStore((state) => state.css);
-  const js = useEditorStore((state) => state.javascript);
-  const zipFileName = useEditorStore((state) => state.fileName);
-  const zipInSingleFile = useEditorStore((state) => state.inOneFile);
 
   function handleClick(tab: TabSelectedType) {
     if (tabSelected === tab) {
@@ -39,14 +33,18 @@ const Sidebar = () => {
     setTabSelected(tab);
   }
 
-  const url = useMemo(() => {
-    const blob = new Blob([buildHTML({ html, css, js })], {
-      type: "text/html",
-    });
+  function openPreview() {
+    const { html, css, javascript: js } = useEditorStore.getState();
+    const blob = new Blob([buildHTML({ html, css, js })], { type: "text/html" });
     const url = URL.createObjectURL(blob);
+    window.open(url, "_blank");
+    setTimeout(() => URL.revokeObjectURL(url), 10_000);
+  }
 
-    return url;
-  }, [html, css, js])
+  function downloadZip() {
+    const { html, css, javascript: js, fileName, inOneFile } = useEditorStore.getState();
+    zipProject({ html, css, js, zipFileName: fileName, zipInSingleFile: inOneFile });
+  }
 
   return (
     <section
@@ -93,22 +91,12 @@ const Sidebar = () => {
           justifyContent: "flex-end",
         }}
       >
-        <Tooltip
-          placement="right"
-          overlay={<span>Open the preview on a new tab</span>}
-        >
-          <a
-            className="icon-button"
-            style={{ textAlign: "center" }}
-            href={url}
-            target="_blank"
-          >
-            <PreviewIcon width={32} height={32} color="#FFF" />
-          </a>
-        </Tooltip>
+        <IconButton onClick={openPreview} label="Open the preview on a new tab">
+          <PreviewIcon width={32} height={32} color="#FFF" />
+        </IconButton>
 
         <IconButton
-          onClick={() => zipProject({ html, css, js, zipFileName, zipInSingleFile })}
+          onClick={downloadZip}
           label="Download the code in a zip file"
         >
           <DownloadIcon width={32} height={32} color="#FFF" />
